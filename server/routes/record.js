@@ -50,11 +50,11 @@ recordRoutes.route("/count").post(function (req, res) {
       const currentCount = result[0].count;
       console.log(currentCount);
       console.log(count);
-      if (parseInt(currentCount) + 1 === parseInt(count)) {
+      if (currentCount + 1 === count) {
         // count up succesfully
         dbConnect.insertOne(
           { game: result[0].game, count: count },
-          function (err, result2) {
+          function (err, _result2) {
             if (err) {
               res.status(400).send("Error inserting matches!");
             } else {
@@ -66,7 +66,7 @@ recordRoutes.route("/count").post(function (req, res) {
       } else {
         // handle fail
         dbConnect.insertOne(
-          { game: parseInt(result[0].game) + 1, count: 1 },
+          { game: result[0].game + 1, count: 1 },
           function (err, result2) {
             if (err) {
               res.status(400).send("Error inserting matches!");

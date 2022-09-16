@@ -11,7 +11,7 @@ const dbo = require("../db/conn");
 // This section will help you get a list of all the records.
 
 recordRoutes.route("/health").get(async function (req, res) {
-  res.send("healthy and running");
+  res.status(200).send("healthy and up");
 });
 recordRoutes.route("/count").get(async function (_req, res) {
   const dbConnect = dbo.getDb().collection("games");

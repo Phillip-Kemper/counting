@@ -11,9 +11,9 @@ const dbo = require("../db/conn");
 // This section will help you get a list of all the records.
 
 recordRoutes.route("/health").get(async function (req, res) {
-  res.send("hi");
+  res.send("healthy and running");
 });
-recordRoutes.route("/listings").get(async function (_req, res) {
+recordRoutes.route("/count").get(async function (_req, res) {
   const dbConnect = dbo.getDb().collection("games");
 
   dbConnect
@@ -37,26 +37,57 @@ recordRoutes.route("/listings").get(async function (_req, res) {
 });
 
 // // This section will help you create a new record.
-// recordRoutes.route("/listings/recordSwipe").post(function (req, res) {
-//   const dbConnect = dbo.getDb();
-//   const matchDocument = {
-//     listing_id: req.body.id,
-//     last_modified: new Date(),
-//     session_id: req.body.session_id,
-//     direction: req.body.direction,
-//   };
+recordRoutes.route("/count").post(function (req, res) {
+  const dbConnect = dbo.getDb().collection("games");
 
-//   dbConnect
-//     .collection("matches")
-//     .insertOne(matchDocument, function (err, result) {
-//       if (err) {
-//         res.status(400).send("Error inserting matches!");
-//       } else {
-//         console.log(`Added a new match with id ${result.insertedId}`);
-//         res.status(204).send();
-//       }
-//     });
-// });
+  const count = req.body.count;
+
+  dbConnect
+    .find()
+    .sort({ game: -1, count: -1 })
+    .limit(1)
+    .toArray(function (err, result) {
+      const currentCount = result[0].count;
+      console.log(currentCount);
+      console.log(count);
+      if (parseInt(currentCount) + 1 === parseInt(count)) {
+        // count up succesfully
+        dbConnect.insertOne(
+          { game: result[0].game, count: count },
+          function (err, result2) {
+            if (err) {
+              res.status(400).send("Error inserting matches!");
+            } else {
+              console.log(`Added a new match with id ${result.insertedId}`);
+              res.status(204).send();
+            }
+          }
+        );
+      } else {
+        // handle fail
+        dbConnect.insertOne(
+          { game: parseInt(result[0].game) + 1, count: 1 },
+          function (err, result2) {
+            if (err) {
+              res.status(400).send("Error inserting matches!");
+            } else {
+              console.log(`Added a new match with id ${result.insertedId}`);
+              res.status(204).send();
+            }
+          }
+        );
+      }
+    });
+
+  // dbConnect.insertOne(matchDocument, function (err, result) {
+  //   if (err) {
+  //     res.status(400).send("Error inserting matches!");
+  //   } else {
+  //     console.log(`Added a new match with id ${result.insertedId}`);
+  //     res.status(204).send();
+  //   }
+  // });
+});
 
 // // This section will help you update a record by id.
 // recordRoutes.route("/listings/updateLike").post(function (req, res) {

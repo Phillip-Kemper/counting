@@ -58,12 +58,14 @@ recordRoutes.route("/count").post(function (req, res) {
               res.status(400).send("Error inserting matches!");
             } else {
               console.log(`Added a new match with id ${result.insertedId}`);
-              res.status(204).send();
+              res.status(200).json({
+                game: result[0].game,
+                count: count,
+              });
             }
           }
         );
       } else {
-        // handle fail
         dbConnect.insertOne(
           { game: result[0].game + 1, count: 1 },
           function (err, result2) {
@@ -71,7 +73,11 @@ recordRoutes.route("/count").post(function (req, res) {
               res.status(400).send("Error inserting matches!");
             } else {
               console.log(`Added a new match with id ${result.insertedId}`);
-              res.status(204).send();
+              // reset count and create new game
+              res.status(200).json({
+                game: result[0].game + 1,
+                count: 1,
+              });
             }
           }
         );

@@ -1,8 +1,21 @@
 import Head from "next/head";
-import React from "react";
+import React, { useEffect } from "react";
 import { Typography } from "@mui/material";
+import useSWR from "swr";
+import { COUNT_ENDPOINT } from "../resources/endpoints";
+
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Home() {
+  const { data, error } = useSWR(COUNT_ENDPOINT, fetcher, {
+    refreshInterval: 1000,
+  });
+
+  useEffect(() => {
+    console.log(data);
+    console.log(error);
+  }, [data, error]);
+
   return (
     <div
       className="container"
@@ -17,7 +30,7 @@ export default function Home() {
 
       <main>
         <Typography variant={"h2"}>Current count</Typography>
-        <Typography variant="h3">25</Typography>
+        <Typography variant="h3">{data.count}</Typography>
         <Typography variant="h4">Submit new count</Typography>
       </main>
 

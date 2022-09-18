@@ -7,14 +7,9 @@ import { COUNT_ENDPOINT } from "../resources/endpoints";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Home() {
-  const { data, error } = useSWR(COUNT_ENDPOINT, fetcher, {
+  const { data } = useSWR(COUNT_ENDPOINT, fetcher, {
     refreshInterval: 1000,
   });
-
-  useEffect(() => {
-    console.log(data);
-    console.log(error);
-  }, [data, error]);
 
   if (!data) {
     return null;

@@ -16,6 +16,10 @@ export default function Home() {
     console.log(error);
   }, [data, error]);
 
+  if (!data) {
+    return null;
+  }
+
   return (
     <div
       className="container"

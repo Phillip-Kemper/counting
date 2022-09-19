@@ -16,6 +16,23 @@ export default function Home() {
   function handleCountSubmissions(event) {
     event.preventDefault();
     console.log(newCount);
+
+    fetch(COUNT_ENDPOINT, {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        count: newCount,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   }
 
   function handleInputChange(e) {

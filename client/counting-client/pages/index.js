@@ -1,6 +1,6 @@
 import Head from "next/head";
-import React, { useEffect } from "react";
-import { Typography } from "@mui/material";
+import React, { useState } from "react";
+import { Typography, TextField, Button } from "@mui/material";
 import useSWR from "swr";
 import { COUNT_ENDPOINT } from "../resources/endpoints";
 
@@ -10,6 +10,21 @@ export default function Home() {
   const { data } = useSWR(COUNT_ENDPOINT, fetcher, {
     refreshInterval: 1000,
   });
+
+  const [newCount, setNewCount] = useState(0);
+
+  function handleCountSubmissions(event) {
+    event.preventDefault();
+    console.log(newCount);
+  }
+
+  function handleInputChange(e) {
+    setNewCount(e.target.value);
+  }
+
+  React.useMemo(() => {
+    console.log(newCount);
+  }, [newCount]);
 
   if (!data) {
     return null;
@@ -31,6 +46,18 @@ export default function Home() {
         <Typography variant={"h2"}>Current count</Typography>
         <Typography variant="h3">{data.count}</Typography>
         <Typography variant="h4">Submit new count</Typography>
+
+        <form onSubmit={handleCountSubmissions}>
+          <TextField
+            id="outlined-basic"
+            label="New count"
+            variant="outlined"
+            type={"number"}
+            value={newCount}
+            onChange={handleInputChange}
+          />
+          <Button type="submit">Submit</Button>
+        </form>
       </main>
 
       <style jsx>{`

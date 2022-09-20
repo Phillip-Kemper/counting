@@ -55,7 +55,6 @@ recordRoutes.route("/count").post(function (req, res) {
             if (err) {
               res.status(400).send("Error inserting matches!");
             } else {
-              console.log(`Added a new match with id ${result.insertedId}`);
               res.status(200).json({
                 game: result[0].game,
                 count: count,
@@ -70,7 +69,6 @@ recordRoutes.route("/count").post(function (req, res) {
             if (err) {
               res.status(400).send("Error inserting matches!");
             } else {
-              console.log(`Added a new match with id ${result.insertedId}`);
               // reset count and create new game
               res.status(200).json({
                 game: result[0].game + 1,

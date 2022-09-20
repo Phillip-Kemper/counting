@@ -15,7 +15,6 @@ export default function Home() {
 
   function handleCountSubmissions(event) {
     event.preventDefault();
-    console.log(newCount);
 
     fetch(COUNT_ENDPOINT, {
       method: "POST", // or 'PUT'
@@ -28,7 +27,8 @@ export default function Home() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Success:", data);
+        const countResult = data.count;
+        setNewCount(countResult);
       })
       .catch((error) => {
         console.error("Error:", error);

@@ -39,7 +39,7 @@ recordRoutes.route("/count").get(async function (_req, res) {
 recordRoutes.route("/count").post(function (req, res) {
   const dbConnect = dbo.getDb().collection("games");
 
-  const count = req.body.count;
+  const count = parseInt(req.body.count);
 
   dbConnect
     .find()
@@ -47,8 +47,6 @@ recordRoutes.route("/count").post(function (req, res) {
     .limit(1)
     .toArray(function (err, result) {
       const currentCount = result[0].count;
-      console.log(currentCount);
-      console.log(count);
       if (currentCount + 1 === count) {
         // count up succesfully
         dbConnect.insertOne(

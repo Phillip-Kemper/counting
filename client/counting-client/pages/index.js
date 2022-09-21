@@ -39,10 +39,6 @@ export default function Home() {
     setNewCount(e.target.value);
   }
 
-  React.useMemo(() => {
-    console.log(newCount);
-  }, [newCount]);
-
   if (!data) {
     return null;
   }
@@ -51,7 +47,7 @@ export default function Home() {
     <div
       className="container"
       style={{
-        backgroundColor: "grey",
+        backgroundColor: "#BFCAEE",
       }}
     >
       <Head>
@@ -60,7 +56,9 @@ export default function Home() {
       </Head>
 
       <main>
-        <Typography variant={"h2"}>Current count</Typography>
+        <Typography variant={"h2"} style={{ fontFamily: "Acme" }}>
+          Current count
+        </Typography>
         <Typography variant="h3">{data.count}</Typography>
         <Typography variant="h4">Submit new count</Typography>
 
@@ -147,15 +145,6 @@ export default function Home() {
           font-size: 1.5rem;
         }
 
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
-
         .grid {
           display: flex;
           align-items: center;
@@ -213,9 +202,7 @@ export default function Home() {
         body {
           padding: 0;
           margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
+          font-family: "Acme", sans-serif;
         }
 
         * {

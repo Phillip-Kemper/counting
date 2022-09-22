@@ -8,4 +8,8 @@ export const THEME = createTheme({
     fontWeightRegular: 400,
     fontWeightMedium: 500,
   },
+  palette: {
+    background: "#BFCAEE",
+    //backgroundColor: "#BFCAEE",
+  },
 });

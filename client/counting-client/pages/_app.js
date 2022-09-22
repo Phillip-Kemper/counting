@@ -6,6 +6,13 @@ function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider theme={THEME}>
       <Component {...pageProps} />
+      <style jsx global>
+        {`
+          body {
+            background: ${THEME.palette.background}};
+          }
+        `}
+      </style>
     </ThemeProvider>
   );
 }

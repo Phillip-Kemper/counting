@@ -8,6 +8,7 @@ import { PURPLE } from "../resources/theme";
 import { SocialIcon } from "react-social-icons";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import { border } from "@mui/system";
+import { AboutThisProjectDialog } from "../components/AboutThisProjectDialog";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -17,6 +18,9 @@ export default function Home() {
   });
 
   const [newCount, setNewCount] = useState(0);
+  const [isRulesDialogOpen, setIsRulesDialogOpen] = useState(false);
+  const [isProjectDialogOpen, setIsProjectDialogOpen] = useState(false);
+  const [isStatisticsDialogOpen, setIsStatisticsDialogOpen] = useState(false);
 
   function handleCountSubmissions(event) {
     event.preventDefault();
@@ -128,13 +132,28 @@ export default function Home() {
               <Typography variant="h4">Rules</Typography>
             </Grid>
             <Grid item>
-              <Typography variant="h4">About This Project</Typography>
+              <Typography
+                variant="h4"
+                onClick={() => {
+                  setIsProjectDialogOpen(true);
+                }}
+                style={{ cursor: "pointer" }}
+              >
+                About This Project
+              </Typography>
             </Grid>
             <Grid item>
               <Typography variant="h4">Statistics</Typography>
             </Grid>
           </Grid>
         </Grid>
+
+        <AboutThisProjectDialog
+          open={isProjectDialogOpen}
+          closeDialog={() => {
+            setIsProjectDialogOpen(false);
+          }}
+        />
       </main>
     </>
   );

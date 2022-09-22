@@ -4,8 +4,8 @@ export const Mountain = () => {
   return (
     <svg
       width="538"
-      height="474"
-      viewBox="0 0 538 474"
+      height="374"
+      viewBox="0 0 538 374"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >

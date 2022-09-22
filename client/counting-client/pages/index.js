@@ -91,6 +91,32 @@ export default function Home() {
             Current: {data.count}
           </Typography>
 
+          <Box alignContent={"center"}>
+            <form onSubmit={handleCountSubmissions}>
+              <Grid container direction={"row"} alignContent="center">
+                <Grid item>
+                  <TextField
+                    label="New count"
+                    variant="standard"
+                    type={"number"}
+                    value={newCount}
+                    onChange={handleInputChange}
+                    size="medium"
+                  />
+                </Grid>
+                <Grid item>
+                  <Button style={{ color: PURPLE }} type="submit">
+                    <ArrowCircleRightIcon />
+                  </Button>
+                </Grid>
+              </Grid>
+            </form>
+          </Box>
+
+          <br />
+          <br />
+          <br />
+
           <Grid
             container
             direction={"row"}
@@ -102,27 +128,7 @@ export default function Home() {
               <Typography variant="h4">Rules</Typography>
             </Grid>
             <Grid item>
-              <Box alignContent={"center"}>
-                <form onSubmit={handleCountSubmissions}>
-                  <Grid container direction={"row"} alignContent="center">
-                    <Grid item>
-                      <TextField
-                        label="New count"
-                        variant="standard"
-                        type={"number"}
-                        value={newCount}
-                        onChange={handleInputChange}
-                        size="medium"
-                      />
-                    </Grid>
-                    <Grid item>
-                      <Button style={{ color: PURPLE }} type="submit">
-                        <ArrowCircleRightIcon />
-                      </Button>
-                    </Grid>
-                  </Grid>
-                </form>
-              </Box>
+              <Typography variant="h4">About This Project</Typography>
             </Grid>
             <Grid item>
               <Typography variant="h4">Statistics</Typography>

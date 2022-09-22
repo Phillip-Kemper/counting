@@ -1,6 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 
-export const RED = "#DB271B";
+export const PURPLE = "#A23089";
 
 export const THEME = createTheme({
   typography: {
@@ -10,7 +10,7 @@ export const THEME = createTheme({
     fontWeightRegular: 400,
     fontWeightMedium: 500,
     allVariants: {
-      color: RED,
+      color: PURPLE,
     },
   },
 

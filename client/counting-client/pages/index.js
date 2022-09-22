@@ -1,10 +1,13 @@
+import { Box, Button, Grid, Link, TextField, Typography } from "@mui/material";
 import Head from "next/head";
 import React, { useState } from "react";
-import { Typography, TextField, Button, Grid, Link } from "@mui/material";
 import useSWR from "swr";
-import { COUNT_ENDPOINT } from "../resources/endpoints";
-import { RED, THEME } from "../resources/theme";
 import { Mountain } from "../components/mountain";
+import { COUNT_ENDPOINT } from "../resources/endpoints";
+import { PURPLE } from "../resources/theme";
+import { SocialIcon } from "react-social-icons";
+import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
+import { border } from "@mui/system";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -53,14 +56,21 @@ export default function Home() {
       </Head>
 
       <main>
-        <Typography variant="h5">
-          <Link
-            href="http://kemperino.com"
-            style={{ textDecoration: "none", color: RED }}
-          >
-            Visit My Web Page
-          </Link>
-        </Typography>
+        <Grid container direction={"row"} justifyContent="space-between">
+          <Grid item>
+            <Typography variant="h5">
+              <Link
+                href="http://kemperino.com"
+                style={{ textDecoration: "none", color: PURPLE }}
+              >
+                Visit My Web Page
+              </Link>
+            </Typography>
+          </Grid>
+          <Grid item>
+            <SocialIcon url={"https://twitter.com/Kemperino_"} />
+          </Grid>
+        </Grid>
         <Grid
           container
           spacing={0}
@@ -70,21 +80,54 @@ export default function Home() {
           height={"90vh"}
         >
           <Mountain />
-          <Typography variant={"h2"}>Current count</Typography>
-          <Typography variant="h3">{data.count}</Typography>
-          <Typography variant="h4">Submit new count</Typography>
+          <Typography
+            variant="h4"
+            style={{
+              marginTop: "-50px",
+              marginBottom: "20px",
+              fontWeight: "600",
+            }}
+          >
+            Current: {data.count}
+          </Typography>
 
-          <form onSubmit={handleCountSubmissions}>
-            <TextField
-              id="outlined-basic"
-              label="New count"
-              variant="outlined"
-              type={"number"}
-              value={newCount}
-              onChange={handleInputChange}
-            />
-            <Button type="submit">Submit</Button>
-          </form>
+          <Grid
+            container
+            direction={"row"}
+            alignItems="center"
+            spacing={32}
+            justifyContent="center"
+          >
+            <Grid item>
+              <Typography variant="h4">Rules</Typography>
+            </Grid>
+            <Grid item>
+              <Box alignContent={"center"}>
+                <form onSubmit={handleCountSubmissions}>
+                  <Grid container direction={"row"} alignContent="center">
+                    <Grid item>
+                      <TextField
+                        label="New count"
+                        variant="standard"
+                        type={"number"}
+                        value={newCount}
+                        onChange={handleInputChange}
+                        size="medium"
+                      />
+                    </Grid>
+                    <Grid item>
+                      <Button style={{ color: PURPLE }} type="submit">
+                        <ArrowCircleRightIcon />
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </form>
+              </Box>
+            </Grid>
+            <Grid item>
+              <Typography variant="h4">Statistics</Typography>
+            </Grid>
+          </Grid>
         </Grid>
       </main>
     </>

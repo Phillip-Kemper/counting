@@ -67,7 +67,7 @@ export default function Home() {
           direction="column"
           alignItems="center"
           justifyContent="center"
-          style={{ minHeight: "100vh" }}
+          height={"90vh"}
         >
           <Mountain />
           <Typography variant={"h2"}>Current count</Typography>

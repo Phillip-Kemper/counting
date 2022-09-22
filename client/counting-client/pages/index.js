@@ -1,9 +1,9 @@
 import Head from "next/head";
 import React, { useState } from "react";
-import { Typography, TextField, Button, Grid } from "@mui/material";
+import { Typography, TextField, Button, Grid, Link } from "@mui/material";
 import useSWR from "swr";
 import { COUNT_ENDPOINT } from "../resources/endpoints";
-import { THEME } from "../resources/theme";
+import { RED, THEME } from "../resources/theme";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -52,13 +52,21 @@ export default function Home() {
       </Head>
 
       <main>
+        <Typography variant="h5">
+          <Link
+            href="http://kemperino.com"
+            style={{ textDecoration: "none", color: RED }}
+          >
+            Visit My Web Page
+          </Link>
+        </Typography>
         <Grid
           container
           spacing={0}
           direction="column"
           alignItems="center"
           justifyContent="center"
-          style={{ minHeight: "100vh", background: THEME.palette.background }}
+          style={{ minHeight: "100vh" }}
         >
           <Typography variant={"h2"}>Current count</Typography>
           <Typography variant="h3">{data.count}</Typography>

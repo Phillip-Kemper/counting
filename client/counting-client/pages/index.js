@@ -4,6 +4,7 @@ import { Typography, TextField, Button, Grid, Link } from "@mui/material";
 import useSWR from "swr";
 import { COUNT_ENDPOINT } from "../resources/endpoints";
 import { RED, THEME } from "../resources/theme";
+import { Mountain } from "../components/mountain";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -68,6 +69,7 @@ export default function Home() {
           justifyContent="center"
           style={{ minHeight: "100vh" }}
         >
+          <Mountain />
           <Typography variant={"h2"}>Current count</Typography>
           <Typography variant="h3">{data.count}</Typography>
           <Typography variant="h4">Submit new count</Typography>

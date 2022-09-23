@@ -36,7 +36,7 @@ recordRoutes.route("/count").get(async function (_req, res) {
     });
 });
 
-recordRoutes.route("/statistics").get(async function (req, res) {
+recordRoutes.route("/stats").get(async function (req, res) {
   const dbConnect = dbo.getDb().collection("games");
 
   dbConnect

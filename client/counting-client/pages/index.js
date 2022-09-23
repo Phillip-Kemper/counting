@@ -1,10 +1,20 @@
-import { Box, Button, Grid, Link, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  Link,
+  ListItem,
+  List,
+  TextField,
+  Typography,
+  ListSubheader,
+} from "@mui/material";
 import { withStyles } from "@mui/styles";
 import Head from "next/head";
 import React, { useState } from "react";
 import useSWR from "swr";
 import { Mountain } from "../components/mountain";
-import { COUNT_ENDPOINT } from "../resources/endpoints";
+import { COUNT_ENDPOINT, STATS_ENDPOINT } from "../resources/endpoints";
 import { PURPLE } from "../resources/theme";
 import { SocialIcon } from "react-social-icons";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
@@ -13,9 +23,15 @@ import { CustomDialog } from "../components/CustomDialog";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Home() {
-  const { data } = useSWR(COUNT_ENDPOINT, fetcher, {
+  const { data: countData } = useSWR(COUNT_ENDPOINT, fetcher, {
     refreshInterval: 1000,
   });
+
+  const { data: statsData } = useSWR(STATS_ENDPOINT, fetcher);
+
+  React.useMemo(() => {
+    console.log(statsData);
+  }, [statsData]);
 
   const [newCount, setNewCount] = useState(0);
   const [isRulesDialogOpen, setIsRulesDialogOpen] = useState(false);
@@ -73,7 +89,7 @@ export default function Home() {
     setNewCount(e.target.value);
   }
 
-  if (!data) {
+  if (!countData || !statsData) {
     return null;
   }
 
@@ -117,7 +133,7 @@ export default function Home() {
               fontWeight: "600",
             }}
           >
-            Current: {data.count}
+            Current: {countData.count}
           </Typography>
 
           <Box alignContent={"center"}>
@@ -212,7 +228,34 @@ export default function Home() {
           }}
           title="Rules"
         >
-          Lorem Ipsum Dalet
+          <Typography>
+            Together we can climb to the summit of the legendary Mount COUNT.
+          </Typography>
+          <Typography>
+            The goal of this game is to climb to the summit of Mount Count as a
+            community. To do so, we must reach a height of 8.849m by counting
+            up.
+          </Typography>
+          <div style={{ color: PURPLE }}>
+            <List sx={{ listStyleType: "disc" }}>
+              <ListSubheader style={{ color: PURPLE }}>
+                The following rules apply:
+              </ListSubheader>
+              <ListItem sx={{ display: "list-item" }}>
+                We have to count up to 8.849 starting from 1
+              </ListItem>
+              <ListItem sx={{ display: "list-item" }}>
+                No number may be skipped - otherwise we go back to 1
+              </ListItem>
+              <ListItem sx={{ display: "list-item" }}>
+                Any wrong input sends us back to the bottom and we have to start
+                at 1 again
+              </ListItem>
+              <ListItem sx={{ display: "list-item" }}>
+                No player is allowed to count twice in a row
+              </ListItem>
+            </List>
+          </div>
         </CustomDialog>
 
         <CustomDialog
@@ -222,7 +265,8 @@ export default function Home() {
           }}
           title="Statistics"
         >
-          Lorem Ipsum Dalet
+          <Typography>Total Games Played: {statsData.gamesPlayed}</Typography>
+          <Typography>Highscore: {statsData.maxCount}</Typography>
         </CustomDialog>
       </main>
     </>

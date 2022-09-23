@@ -218,7 +218,54 @@ export default function Home() {
           }}
           title="About This Project"
         >
-          Lorem Ipsum Dalet
+          <Typography>
+            {" "}
+            This project is heavily inspired by{" "}
+            <a href="https://counting.duckgroup.xyz/">
+              The Discord Counting Bot
+            </a>
+            .
+          </Typography>
+
+          <Typography>
+            The goal was to build a creative project where can I build a
+            Full-Stack Web App using the MERN Stack (Mongo DB, Express, React
+            (Next.JS), Node.Js
+          </Typography>
+          <div style={{ color: PURPLE }}>
+            <List sx={{ listStyleType: "disc" }}>
+              <ListSubheader style={{ color: PURPLE }}>
+                The following things were learned and applied:
+              </ListSubheader>
+              <ListItem sx={{ display: "list-item" }}>
+                Using Next.JS over Create-React-App
+              </ListItem>
+              <ListItem sx={{ display: "list-item" }}>
+                Using Figma to prototype the design and design an SVG for the
+                mountains with the sunset.
+              </ListItem>
+              <ListItem sx={{ display: "list-item" }}>
+                Using Express and Mongo DB to spin up a Rest API super quickly.
+              </ListItem>
+            </List>
+          </div>
+          <div style={{ color: PURPLE }}>
+            <List sx={{ listStyleType: "disc" }}>
+              <ListSubheader style={{ color: PURPLE }}>
+                The following things still need to be improved:
+              </ListSubheader>
+              <ListItem sx={{ display: "list-item" }}>
+                Check the IP Adress of the User request to prevent users from
+                counting twice in a row.
+              </ListItem>
+              <ListItem sx={{ display: "list-item" }}>
+                Make web page responsive.
+              </ListItem>
+              <ListItem sx={{ display: "list-item" }}>
+                Improve the design and colors used.
+              </ListItem>
+            </List>
+          </div>
         </CustomDialog>
 
         <CustomDialog

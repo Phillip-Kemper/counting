@@ -16,9 +16,9 @@ const PaperComponent = (props) => {
   return <Box style={{ backgroundColor: "grey" }}>{props.children}</Box>;
 };
 
-export const AboutThisProjectDialog = (props) => {
+export const CustomDialog = (props) => {
   //next step: close button
-  const { closeDialog, open } = props;
+  const { closeDialog, open, title } = props;
 
   return (
     <Dialog
@@ -36,7 +36,7 @@ export const AboutThisProjectDialog = (props) => {
           alignItems={"center"}
         >
           <Grid item>
-            <Typography>About This Project </Typography>
+            <Typography>{title} </Typography>
           </Grid>
           <Grid item>
             <IconButton aria-label="close" onClick={closeDialog}>
@@ -47,8 +47,7 @@ export const AboutThisProjectDialog = (props) => {
       </DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-slide-description">
-          Let Google help apps determine location. This means sending anonymous
-          location data to Google, even when no apps are running.
+          {props.children}
         </DialogContentText>
       </DialogContent>
     </Dialog>

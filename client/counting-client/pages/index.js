@@ -8,7 +8,7 @@ import { PURPLE } from "../resources/theme";
 import { SocialIcon } from "react-social-icons";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import { border } from "@mui/system";
-import { AboutThisProjectDialog } from "../components/AboutThisProjectDialog";
+import { CustomDialog } from "../components/AboutThisProjectDialog";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -134,7 +134,15 @@ export default function Home() {
             justifyContent="center"
           >
             <Grid item>
-              <Typography variant="h4">Rules</Typography>
+              <Typography
+                variant="h4"
+                onClick={() => {
+                  setIsRulesDialogOpen(true);
+                }}
+                style={{ cursor: "pointer" }}
+              >
+                Rules
+              </Typography>
             </Grid>
             <Grid item>
               <Typography
@@ -148,17 +156,48 @@ export default function Home() {
               </Typography>
             </Grid>
             <Grid item>
-              <Typography variant="h4">Statistics</Typography>
+              <Typography
+                variant="h4"
+                onClick={() => {
+                  setIsStatisticsDialogOpen(true);
+                }}
+                style={{ cursor: "pointer" }}
+              >
+                Statistics
+              </Typography>
             </Grid>
           </Grid>
         </Grid>
 
-        <AboutThisProjectDialog
+        <CustomDialog
           open={isProjectDialogOpen}
           closeDialog={() => {
             setIsProjectDialogOpen(false);
           }}
-        />
+          title="About This Project"
+        >
+          Lorem Ipsum Dalet
+        </CustomDialog>
+
+        <CustomDialog
+          open={isRulesDialogOpen}
+          closeDialog={() => {
+            setIsRulesDialogOpen(false);
+          }}
+          title="Rules"
+        >
+          Lorem Ipsum Dalet
+        </CustomDialog>
+
+        <CustomDialog
+          open={isStatisticsDialogOpen}
+          closeDialog={() => {
+            setIsStatisticsDialogOpen(false);
+          }}
+          title="Statistics"
+        >
+          Lorem Ipsum Dalet
+        </CustomDialog>
       </main>
     </>
   );

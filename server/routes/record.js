@@ -36,6 +36,29 @@ recordRoutes.route("/count").get(async function (_req, res) {
     });
 });
 
+recordRoutes.route("/statistics").get(async function (req, res) {
+  const dbConnect = dbo.getDb().collection("games");
+
+  dbConnect
+    .find()
+    .sort({ game: -1 })
+    .limit(1)
+    .toArray(function (err, result) {
+      const gamesPlayed = result[0].game;
+
+      dbConnect
+        .find()
+        .sort({ count: -1 })
+        .limit(1)
+        .toArray(function (err2, result2) {
+          res.json({
+            gamesPlayed: gamesPlayed,
+            maxCount: result2[0].count,
+          });
+        });
+    });
+});
+
 recordRoutes.route("/count").post(function (req, res) {
   const dbConnect = dbo.getDb().collection("games");
 

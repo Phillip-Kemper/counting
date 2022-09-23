@@ -13,7 +13,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import React from "react";
 
 const PaperComponent = (props) => {
-  return <Box style={{ backgroundColor: "grey" }}>{props.children}</Box>;
+  return <Box style={{ backgroundColor: "white" }}>{props.children}</Box>;
 };
 
 export const CustomDialog = (props) => {

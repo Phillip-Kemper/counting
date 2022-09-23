@@ -8,7 +8,7 @@ import { COUNT_ENDPOINT } from "../resources/endpoints";
 import { PURPLE } from "../resources/theme";
 import { SocialIcon } from "react-social-icons";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
-import { CustomDialog } from "../components/AboutThisProjectDialog";
+import { CustomDialog } from "../components/CustomDialog";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 

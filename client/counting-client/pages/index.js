@@ -1,4 +1,5 @@
 import { Box, Button, Grid, Link, TextField, Typography } from "@mui/material";
+import { withStyles } from "@mui/styles";
 import Head from "next/head";
 import React, { useState } from "react";
 import useSWR from "swr";
@@ -7,7 +8,6 @@ import { COUNT_ENDPOINT } from "../resources/endpoints";
 import { PURPLE } from "../resources/theme";
 import { SocialIcon } from "react-social-icons";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
-import { border } from "@mui/system";
 import { CustomDialog } from "../components/AboutThisProjectDialog";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -21,6 +21,31 @@ export default function Home() {
   const [isRulesDialogOpen, setIsRulesDialogOpen] = useState(false);
   const [isProjectDialogOpen, setIsProjectDialogOpen] = useState(false);
   const [isStatisticsDialogOpen, setIsStatisticsDialogOpen] = useState(false);
+
+  const StyledTextField = withStyles({
+    root: {
+      "& label.Mui-focused": {
+        color: PURPLE,
+      },
+      "& .MuiInput-underline:after": {
+        borderBottomColor: PURPLE,
+      },
+      "& .MuiInput-underline:before": {
+        borderBottomColor: PURPLE,
+      },
+      "& .MuiOutlinedInput-root": {
+        "& fieldset": {
+          borderColor: PURPLE,
+        },
+        "&:hover fieldset": {
+          borderColor: PURPLE,
+        },
+        "&.Mui-focused fieldset": {
+          borderColor: PURPLE,
+        },
+      },
+    },
+  })(TextField);
 
   function handleCountSubmissions(event) {
     event.preventDefault();
@@ -104,13 +129,14 @@ export default function Home() {
                 alignItems={"center"}
               >
                 <Grid item>
-                  <TextField
+                  <StyledTextField
                     label="New count"
                     variant="standard"
                     type={"number"}
                     value={newCount}
                     onChange={handleInputChange}
                     size="medium"
+                    sx={{ input: { color: PURPLE } }}
                   />
                 </Grid>
                 <Grid item>

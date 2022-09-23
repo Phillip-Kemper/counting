@@ -97,7 +97,12 @@ export default function Home() {
 
           <Box alignContent={"center"}>
             <form onSubmit={handleCountSubmissions}>
-              <Grid container direction={"row"} alignContent="center">
+              <Grid
+                container
+                direction={"row"}
+                alignContent="center"
+                alignItems={"center"}
+              >
                 <Grid item>
                   <TextField
                     label="New count"

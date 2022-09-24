@@ -29,6 +29,12 @@ export default function Home() {
 
   const { data: statsData } = useSWR(STATS_ENDPOINT, fetcher);
 
+  const { data: ipData } = useSWR("https://geolocation-db.com/json/", fetcher);
+
+  React.useMemo(() => {
+    console.log(ipData);
+  }, [ipData]);
+
   const [newCount, setNewCount] = useState(0);
   const [isRulesDialogOpen, setIsRulesDialogOpen] = useState(false);
   const [isProjectDialogOpen, setIsProjectDialogOpen] = useState(false);

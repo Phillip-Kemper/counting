@@ -31,7 +31,7 @@ recordRoutes.route("/count").get(async function (_req, res) {
           res.json({
             currentGame: currentGame,
             count: result[0].count,
-            clientIp: result[0].clientIp ? result[0].clientIp : undefined,
+            clientIp: result[0].clientIp,
           });
         });
     });
@@ -55,14 +55,14 @@ recordRoutes.route("/stats").get(async function (req, res) {
           res.json({
             gamesPlayed: gamesPlayed,
             maxCount: result2[0].count,
-            clientIp: result2[0].clientIp ? result2[0].clientIp : undefined,
+            clientIp: result2[0].clientIp,
           });
         });
     });
 });
 
 recordRoutes.route("/count").post(function (req, res) {
-  console.log(req.clientIp);
+  console.log(req.clientIp == true);
 
   const dbConnect = dbo.getDb().collection("games");
 
@@ -77,7 +77,7 @@ recordRoutes.route("/count").post(function (req, res) {
       if (currentCount + 1 === count) {
         // count up succesfully
         dbConnect.insertOne(
-          { game: result[0].game, count: count },
+          { game: result[0].game, count: count, clientIp: req.clientIp },
           function (err, _result2) {
             if (err) {
               res.status(400).send("Error inserting matches!");
@@ -85,7 +85,7 @@ recordRoutes.route("/count").post(function (req, res) {
               res.status(200).json({
                 game: result[0].game,
                 count: count,
-                clientIp: req.clientIp ? req.clientIp : undefined,
+                clientIp: req.clientIp,
               });
             }
           }
@@ -101,7 +101,7 @@ recordRoutes.route("/count").post(function (req, res) {
               res.status(200).json({
                 game: result[0].game + 1,
                 count: 1,
-                clientIp: req.clientIp ? req.clientIp : undefined,
+                clientIp: req.clientIp,
               });
             }
           }

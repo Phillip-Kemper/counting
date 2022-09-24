@@ -15,12 +15,6 @@ app.use(express.json());
 app.use(requestIp.mw());
 app.use(require("./routes/record"));
 
-// Global error handling
-// app.use(function (err, _req, res) {
-//   console.error(err.stack);
-//   res.status(500).send("Something broke!");
-// });
-
 // perform a database connection when the server starts
 dbo.connectToServer(function (err) {
   if (err) {

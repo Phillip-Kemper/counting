@@ -1,5 +1,7 @@
 require("dotenv").config({ path: "./config.env" });
 
+const requestIp = require("request-ip");
+
 const express = require("express");
 const cors = require("cors");
 // get MongoDB driver connection
@@ -10,6 +12,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(requestIp.mw());
 app.use(require("./routes/record"));
 
 // Global error handling

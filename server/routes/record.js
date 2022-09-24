@@ -31,6 +31,7 @@ recordRoutes.route("/count").get(async function (_req, res) {
           res.json({
             currentGame: currentGame,
             count: result[0].count,
+            clientIp: result[0].clientIp ? result[0].clientIp : undefined,
           });
         });
     });
@@ -54,12 +55,15 @@ recordRoutes.route("/stats").get(async function (req, res) {
           res.json({
             gamesPlayed: gamesPlayed,
             maxCount: result2[0].count,
+            clientIp: result2[0].clientIp ? result2[0].clientIp : undefined,
           });
         });
     });
 });
 
 recordRoutes.route("/count").post(function (req, res) {
+  console.log(req.clientIp);
+
   const dbConnect = dbo.getDb().collection("games");
 
   const count = parseInt(req.body.count);
@@ -81,6 +85,7 @@ recordRoutes.route("/count").post(function (req, res) {
               res.status(200).json({
                 game: result[0].game,
                 count: count,
+                clientIp: req.clientIp ? req.clientIp : undefined,
               });
             }
           }
@@ -96,6 +101,7 @@ recordRoutes.route("/count").post(function (req, res) {
               res.status(200).json({
                 game: result[0].game + 1,
                 count: 1,
+                clientIp: req.clientIp ? req.clientIp : undefined,
               });
             }
           }

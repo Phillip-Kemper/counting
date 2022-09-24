@@ -29,10 +29,6 @@ export default function Home() {
 
   const { data: statsData } = useSWR(STATS_ENDPOINT, fetcher);
 
-  React.useMemo(() => {
-    console.log(statsData);
-  }, [statsData]);
-
   const [newCount, setNewCount] = useState(0);
   const [isRulesDialogOpen, setIsRulesDialogOpen] = useState(false);
   const [isProjectDialogOpen, setIsProjectDialogOpen] = useState(false);

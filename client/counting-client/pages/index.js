@@ -21,6 +21,7 @@ import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import { CustomDialog } from "../components/CustomDialog";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
+const ipFetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Home() {
   const { data: countData } = useSWR(COUNT_ENDPOINT, fetcher, {
@@ -29,11 +30,10 @@ export default function Home() {
 
   const { data: statsData } = useSWR(STATS_ENDPOINT, fetcher);
 
-  const { data: ipData } = useSWR("https://geolocation-db.com/json/", fetcher);
-
-  React.useMemo(() => {
-    console.log(ipData);
-  }, [ipData]);
+  const { data: ipData } = useSWR(
+    "https://geolocation-db.com/json/",
+    ipFetcher
+  );
 
   const [newCount, setNewCount] = useState(0);
   const [isRulesDialogOpen, setIsRulesDialogOpen] = useState(false);
@@ -91,7 +91,7 @@ export default function Home() {
     setNewCount(e.target.value);
   }
 
-  if (!countData || !statsData) {
+  if (!countData || !statsData || !ipData) {
     return null;
   }
 
@@ -139,31 +139,37 @@ export default function Home() {
           </Typography>
 
           <Box alignContent={"center"}>
-            <form onSubmit={handleCountSubmissions}>
-              <Grid
-                container
-                direction={"row"}
-                alignContent="center"
-                alignItems={"center"}
-              >
-                <Grid item>
-                  <StyledTextField
-                    label="New count"
-                    variant="standard"
-                    type={"number"}
-                    value={newCount}
-                    onChange={handleInputChange}
-                    size="medium"
-                    sx={{ input: { color: PURPLE } }}
-                  />
+            {ipData.IPv4 !== countData.clientIp ? (
+              <form onSubmit={handleCountSubmissions}>
+                <Grid
+                  container
+                  direction={"row"}
+                  alignContent="center"
+                  alignItems={"center"}
+                >
+                  <Grid item>
+                    <StyledTextField
+                      label="New count"
+                      variant="standard"
+                      type={"number"}
+                      value={newCount}
+                      onChange={handleInputChange}
+                      size="medium"
+                      sx={{ input: { color: PURPLE } }}
+                    />
+                  </Grid>
+                  <Grid item>
+                    <Button style={{ color: PURPLE }} type="submit">
+                      <ArrowCircleRightIcon />
+                    </Button>
+                  </Grid>
                 </Grid>
-                <Grid item>
-                  <Button style={{ color: PURPLE }} type="submit">
-                    <ArrowCircleRightIcon />
-                  </Button>
-                </Grid>
-              </Grid>
-            </form>
+              </form>
+            ) : (
+              <Typography variant="h4">
+                IP not eligible! It's another players turn.
+              </Typography>
+            )}
           </Box>
 
           <br />

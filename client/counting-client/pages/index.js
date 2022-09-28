@@ -8,7 +8,6 @@ import {
   TextField,
   Typography,
   ListSubheader,
-  Tooltip,
 } from "@mui/material";
 import { withStyles } from "@mui/styles";
 import Head from "next/head";
@@ -167,9 +166,7 @@ export default function Home() {
                 </Grid>
               </form>
             ) : (
-              <Tooltip title="IP not eligible">
-                <Typography variant="h4">It's another players turn.</Typography>
-              </Tooltip>
+              <Typography variant="h4">It's another players turn.</Typography>
             )}
           </Box>
 

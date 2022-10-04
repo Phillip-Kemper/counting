@@ -166,7 +166,9 @@ export default function Home() {
                 </Grid>
               </form>
             ) : (
-              <Typography variant="h4">It's another players turn.</Typography>
+              <Typography variant="h4">
+                It&apos;s another players turn.
+              </Typography>
             )}
           </Box>
 

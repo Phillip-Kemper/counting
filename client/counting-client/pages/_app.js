@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-no-comment-textnodes */
 import { ThemeProvider } from "@mui/material";
 import { THEME } from "../resources/theme";
 import React from "react";

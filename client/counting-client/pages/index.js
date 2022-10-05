@@ -100,6 +100,10 @@ export default function Home() {
       <Head>
         <title>Mount Count</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=0.75"
+        ></meta>
       </Head>
 
       <main>
@@ -126,17 +130,21 @@ export default function Home() {
           justifyContent="center"
           height={"90vh"}
         >
-          <Mountain />
-          <Typography
-            variant="h4"
-            style={{
-              marginTop: "-50px",
-              marginBottom: "20px",
-              fontWeight: "600",
-            }}
-          >
-            Current: {countData.count}
-          </Typography>
+          <Grid item>
+            <Mountain />
+          </Grid>
+          <Grid item>
+            <Typography
+              variant="h4"
+              style={{
+                marginTop: "-50px",
+                marginBottom: "20px",
+                fontWeight: "600",
+              }}
+            >
+              Current: {countData.count}
+            </Typography>
+          </Grid>
 
           <Box alignContent={"center"}>
             {ipData.IPv4 !== countData.clientIp ? (
@@ -180,7 +188,7 @@ export default function Home() {
             container
             direction={"row"}
             alignItems="center"
-            spacing={32}
+            spacing={2}
             justifyContent="center"
           >
             <Grid item>
